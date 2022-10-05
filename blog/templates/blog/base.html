@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% endif %}
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Plugins CSS File -->
+    
+
+    
+    <!-- before Main CSS File -->
+    
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/skins/skin-demo-5.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/demos/demo-5.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/corey.css' %}">
+
+    <!-- script after
+    ================================================== -->
+    <script src="{% static 'home/js/modernizr.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome/all.min.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'home/icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'home/icon.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'home/icon.png' %}">
+    <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+<body id="top">
+
+<!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- site header
+    ================================================== -->
+    <header class="s-header">
+
+        <div class="header-logo">
+            <a class="site-logo" href="/">
+                <img src="{% static 'home/images/logo.png' %}" alt="Swirloma">
+            </a>
+        </div>
+
+        <div class="header-email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z"/></svg>
+            {% for info in infos %}
+            <a href="mailto:#0">{{ info.email_address }}</a>
+            {% endfor %}
+        </div>
+
+    </header> <!-- end s-header -->
+
+
+    <!-- intro
+    ================================================== -->
+    <section id="intro" class="s-intro s-intro--static">
+
+
+        <div class="grid-overlay">
+            <div></div>
+        </div>
+
+        <div class="row intro-content">
+
+            <div class="column">
+
+                <div class="intro-content__text">
+
+                    <h3>
+                    My Blog Posts
+                    </h3>
+                    
+                    <h1>
+                    Get exciting tech updates. <br>
+                    My personal <br>
+                    blog gives <br>
+                    you essential Tech update.<br>
+                    Hacks, and related blogs around the world.
+                    </h1>
+
+        </div> <!-- end intro-content__text -->
+
+               
+
+            </div> <!-- end column -->
+
+        </div> <!--  end intro-content -->
+
+        
+
+        <ul class="intro-social">
+            {% for info in infos %}
+            <li><a href="{{ info.facebook_link }}"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.twitter_link }}"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.instagram_link }}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.mobile_number }}"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.linkedin_link }}"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+            {% endfor %}
+        </ul> <!-- end intro social -->
+
+        <div class="intro-scroll">
+            <a href="#info" class="scroll-link smoothscroll">
+                Scroll For More
+            </a>
+        </div> <!-- end intro scroll -->
+
+    </section> <!-- end s-intro -->
+
+    {% block content %}{% endblock content%}
+    <hr>
+    <div class="row">
+        <div class="column large-6 tab-full">
+            <h4>More About Me.</h4>
+            <p>
+                I have always loved learning new things, whether it's taking a class or reading a book. My passion for studying computers led me to pursue a degree in this field.
+
+                My experience in college has been amazing overall, but there were definitely some hard times as well. 
+                The biggest challenge I faced was getting through the tough classes that required me to work harder than 
+                ever before and study more than ever before as well. However, this was also one of the most rewarding 
+                experiences I've had so far because I am now confident that I can handle anything life throws at me! 
+                Few of my web and software development projects are available on my <a href="https://www.github.com/martins0023">github</a> page.
+            </p>
+        </div>
+        <div class="column large-6 tab-full">
+            <h4>Order on fiverr</h4>
+            <p>
+                Check out my Gig(s) on fiverr and place an order, I offer and put up few gigs out on fiverr<br>
+                I highly recommend <a href="{{ info.whatsapp_link }}">chatting with me</a> personally, if you're placing an order out of my fiverr Gig(s).
+                Probably you need more features or need to ask me some questions.
+            </p>
+            <a href="https://www.fiverr.com/oladapomiracle?public_mode=true" class="btn btn--stroke h-full-width">Order on fiverr</a>
+            <hr>
+                <h4>I'm on Upwork</h4>
+                <p>
+                    If you work with upwork regularly or you just prefer getting along with <a href="http://www.upwork.com/miracle">upwork</a><br>
+                    You can as well just hire me on there <a href="{{ info.upwork_link }}"></a> if checking out my profile on upwork is all what you
+                    want to do, you're free to go ahead. Most clients prefer just working or hiring people on upwork.
+                </p>
+                <a href="https://www.fiverr.com/oladapomiracle?public_mode=true" class="btn btn--stroke h-full-width">Check me out on upwork</a>
+            
+        </div>
+    </div>
+        </div>
+        </div>
+
+        </div> <!-- end 01. tab about -->
+
+        <!-- 02. tab services -->
+
+
+        <!-- 03. tab contact -->
+        <div id="tab-contact" class="tab-content__item">
+
+            <hr>
+        <div class="row tab-content__item-header">
+        <div class="column">
+            <h1>Get In Touch With Me.</h1>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="column">
+            <p class="lead">
+            Probably you need some clarfications about the services that's being listed, or you need to get in touch with me 
+            as soon as possible, you can reach out to me on my social media platforms by sending a direct message,
+            calling or texting any of the available numbers below is welcomed as well.
+            </p>
+
+            <div class="row">
+                <div class="column large-six tab-full">
+                    <h4>Where to Find Me</h4>
+
+                    <p>
+                    1600 Soka Road<br>
+                    Ire-Akari Estate, OY<br>
+                    200109 NG
+                    </p>
+
+                </div>
+
+                <div class="column large-six tab-full">
+                    <h4>Follow Me</h4>
+
+                    <ul class="link-list">
+                        {% for info in infos %}
+                        <li><a href="{{ info.facebook_link }}"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a></li>
+                        {% endfor %}
+                        {% for info in infos %}
+                        <li><a href="{{ info.twitter_link }}"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+                        {% endfor %}
+                        {% for info in infos %}
+                        <li><a href="{{ info.instagram_link }}"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+                        {% endfor %}
+                        {% for info in infos %}
+                        <li><a href="{{ info.whatsapp_link }}"><i class="fab fa-whatsapp" aria-hidden="true"></i> Whatsapp</a></li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+
+            <p class="tab-content__item-bottom">
+                {% for info in infos %}
+                <a href="mailto:{{ info.email_address }}" class="contact-email">{{ info.email_address }}</a>
+                {% endfor %}
+                <span class="contact-number">
+                    {% for info in infos %} 
+                    <a href="tel:{{ info.mobile_number }}">{{ info.mobile_number }}</a>
+                    {% endfor %}
+                    {% for info in infos %}
+                    <a href="tel:{{ info.alternate_mobile_number }}">{{ info.alternate_mobile_number }}</a>
+                    {% endfor %}
+                </span>
+            </p>
+
+        </div>
+    </div>
+
+    </div> <!-- end 03. tab contact -->
+
+    </div> <!-- end tab content -->
+
+    <footer>
+
+    <div class="ss-copyright">
+    <span>© Copyright swirloma <script>document.write(new Date().getFullYear());</script></span> 
+    <span>Developed by <a href="">O.M.A</a></span>
+    </div>
+
+    <div class="ss-go-top">
+    <a class="smoothscroll" title="Back to Top" href="#top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0l8 9h-6v15h-4v-15h-6z"></path></svg>
+    </a>
+    </div>
+
+    </footer>
+
+    </div> <!-- end column -->
+</div> <!-- end row -->
+
+ </section> <!-- end s-info -->
+
+ 
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'home/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'home/js/plugins.js' %}"></script>
+    <script src="{% static 'home/js/main.js' %}"></script>
+    <script src="{% static 'home/js/particle-settings.js' %}"></script>
+    <script src="{% static 'home/js/particles.min.js' %}"></script>
+
+    <!-----
+    <script src="{% static 'home/js/jquery.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.hoverIntent.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'home/js/superfish.min.js' %}"></script>
+    <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap-input-spinner.js' %}"></script>
+    <script src="{% static 'home/js/jquery.plugin.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.magnific-popup.min.js' %}"></script>
+    
+    <-- Main JS File --
+    <script src="{% static 'home/js/main.js' %}"></script>
+    <script src="{% static 'home/js/demos/demo-24.js' %}"></script>------>
+
+</body>
+
+            

@@ -1,0 +1,85 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <!-- info
+    ================================================== -->
+    <section id="info" class="s-info">
+
+        <div class="vert-line"></div>
+        
+        <div class="row info-content">
+            <div class="column">
+                
+                <nav class="tab-nav">
+                    <ul class="tab-nav__list"> 
+                        <li class="active" data-id="tab-about">
+                            <a href="#0">
+                                <span>My Blog</span>
+                            </a>
+                        </li>
+                        <li class="" data-id="tab-nft">
+                            <a href="{% url 'nft' %}">
+                                <span>NFT's</span>
+                            </a>
+                        </li>
+                        <li class="" data-id="tab-home">
+                            <a href="{% url 'home' %}">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </nav> <!-- end tab-nav -->
+
+                <div class="tab-content">
+
+                    <!-- 01. tab about -->
+                    <div id="tab-about" class='tab-content__item'>
+
+                        <div class="row tab-content__item-header">
+                            <div class="column">
+                                <h1>Hello. Welcome to my <b>Latest blog posts</b>.</h1>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="column">
+                                {% for intro in intros %}
+                                <p class="lead">
+                                    {{ intro.blog_welcome_intro }}
+                                </p>
+                                {% endfor %}
+
+                                {% for blog in blogs %}
+                                <article class="media content-section">
+                                    <!--<img class="rounded-circle article-img" src="{{ blog.blog_image.url }}" alt="">-->
+                                      <div class="media-body">
+                                      <div class="article-metadata">
+                                          <small class="text-muted">{{ blog.blog_title }}|</small> <small class="text-muted">{{ blog.date_posted }}</small>
+                                      </div>
+                                      <h2 class=""><a class="article-title" href="{% url 'blog-detail' blog.id %}">{{ blog.blog_title }}</a></h2>
+                                      <div class="single-post">
+                                        <a class="" href="{% url 'blog-detail' blog.id %}"><img class="  miracle-img " src="{{ blog.blog_image.url }}" alt="{{ blog.blog_title }}"></a>
+                                      </div>
+                                      <p class="article-content">{{ blog.blog_content|slice:":300" }} <a href="{% url 'blog-detail' blog.id %}">see more..</a> </p>
+                                      </div>
+                                  </article>
+                                  {% endfor %}
+
+                                {% if is_paginated %}
+
+                                    {% if page_obj.has_next %}
+                                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">load more...</a>
+                                    {% endif %}
+                                    {% if page_obj.has_previous %}
+                                    <a class="btn btn-outline-info mb-4" href="?page=1">First page</a>
+                                    <a class="btn btn-outlinr-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                    {% endif %}
+                                    
+                                    {% if page_obj.has_next %}
+                                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last page</a>
+                                    {% endif %}
+
+                                {% endif %}
+              
+ {% endblock content %}    
+                                
