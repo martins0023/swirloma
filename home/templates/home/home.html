@@ -1,0 +1,633 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% endif %}
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/corey.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+    
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'home/js/modernizr.js' %}"></script>
+    <script defer src="{% static 'home/js/fontawesome/all.min.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'home/icon.png.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'home/icon.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'home/icon.png' %}">
+    <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+<body id="top">
+
+<!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- site header
+    ================================================== -->
+    <header class="s-header">
+
+        <div class="header-logo">
+            <a class="site-logo" href="/">
+                <img src="{% static 'home/images/logo.png' %}" alt="Swirloma">
+            </a>
+        </div>
+
+        <div class="header-email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z"/></svg>
+            {% for info in infos %}
+            <a href="mailto:#0">{{ info.email_address }}</a>
+            {% endfor %}
+        </div>
+
+    </header> <!-- end s-header -->
+
+
+    <!-- intro
+    ================================================== -->
+    <section id="intro" class="s-intro s-intro--slides">
+
+        <div class="intro-slider">
+            <div class="intro-slider-img bg-opacity-40" style="background-image: url({% static 'home/images/slides/slide-01.jpg' %});"></div>
+            <div class="intro-slider-img" style="background-image: url({% static 'home/images/slides/slide-02.jpg' %});"></div>
+            <div class="intro-slider-img" style="background-image: url({% static 'home/images/slides/slide-03.jpg' %});"></div>
+        </div>
+
+        <div class="grid-overlay">
+            <div></div>
+        </div> 
+
+        <div class="row intro-content">
+
+            <div class="column">
+
+                <div class="intro-content__text">
+
+                    <h3>
+                    Tell me about your project
+                    </h3>
+                    
+                    <h1>
+                    Are you worried or <br>
+                    working on a super <br>
+                    awesome project you can't<br>
+                    handle on <br> your own or alone?
+                    </h1>
+
+                </div> <!-- end intro-content__text -->
+                <div class="alert-box">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                    <b>{{ message }}</b>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="intro-content__bottom">
+
+                    <div class="intro-content__counter-wrap">
+                        <h4>Countdown till <script>document.write(new Date().getFullYear());</script> is over</h4>
+            
+                        <div class="counter">
+                            <div class="counter__time days">
+                                365
+                                <span>D</span>
+                            </div>
+                            <div class="counter__time hours">
+                                09
+                                <span>H</span>
+                            </div>
+                            <div class="counter__time minutes">
+                                54
+                                <span>M</span>
+                            </div>
+                            <div class="counter__time seconds">
+                                57
+                                <span>S</span>
+                            </div>
+                        </div>  <!-- end counter -->
+                    </div> <!-- end intro-content__counter-wrap -->
+
+                    <div class="intro-content__notify">
+                        <button type="button" class="btn--stroke btn--small modal-trigger">
+                            Send me a message
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 12l-9-9v7h-15v4h15v7z"/></svg>
+                        </button>
+                        <a href="{% url 'blog' %}" ><button type="button" class="btn--stroke btn--small ">
+                            my blog
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 12l-9-9v7h-15v4h15v7z"/></svg>
+                        </button></a>
+                    </div> <!-- end intro-content__notify -->
+    
+                </div> <!-- end intro-content__bottom -->
+
+            </div> <!-- end column -->
+
+        </div> <!--  end intro-content -->
+        
+
+        <div class="modal">
+            <div class="modal__inner">
+
+                <span class="modal__close"></span>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/></svg>
+
+                <h3>Send me a message</h3>
+                <p>
+                Send me a message or make an enquiry below.<br>
+                Reply can take up to 24-48hrs in some instances. Thank You!
+                </p>
+
+                <form  method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" name="subscribe" value="send message" class="btn--small h-full-width">
+                </form>
+
+            </div> <!-- end modal inner -->
+        </div> <!-- end modal -->
+
+        <ul class="intro-social">
+            {% for info in infos %}
+            <li><a href="{{ info.facebook_link }}"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.twitter_link }}"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.instagram_link }}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.whatsapp_link }}"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+            {% endfor %}
+            {% for info in infos %}
+            <li><a href="{{ info.linkedin_link }}"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+            {% endfor %}
+        </ul> <!-- end intro social -->
+
+        <div class="intro-scroll">
+            <a href="#info" class="scroll-link smoothscroll">
+                Scroll For More
+            </a>
+        </div> <!-- end intro scroll -->
+
+    </section> <!-- end s-intro -->
+
+
+    <!-- info
+    ================================================== -->
+    <section id="info" class="s-info">
+
+        <div class="vert-line"></div>
+        
+        <div class="row info-content">
+            <div class="column">
+                
+                <nav class="tab-nav">
+                    <ul class="tab-nav__list"> 
+                        <li class="active" data-id="tab-about">
+                            <a href="#0">
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li data-id="tab-services">
+                            <a href="#0">
+                                <span>Services</span>
+                            </a>
+                        </li>
+                        <li data-id="tab-project">
+                            <a href="#0">
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li data-id="tab-contact">
+                            <a href="#0">
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav> <!-- end tab-nav -->
+
+                <div class="tab-content">
+
+                    <!-- 01. tab about -->
+                    <div id="tab-about" class='tab-content__item'>
+
+                        <div class="row tab-content__item-header">
+                            <div class="column">
+                                <h1>Hello. My name is <b>Miracle Oladapo A</b>.</h1>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="column">
+                                <p class="lead">
+                                    I am a software developer and designer. My specialties are in the Python programming 
+                                    language, as well as the design and development of software programs. I have experience 
+                                    with multiple different kinds of projects, including Web applications that run on both 
+                                    desktop computers and mobile devices, as well as command-line programs that can be used 
+                                    on any platform.
+                                </p>
+
+                                <p>
+                                    I love working with people who are passionate about the work they do, which is why I love 
+                                    working with small businesses and nonprofits. Because they're often understaffed, they can't 
+                                    afford to have their websites fail—and if you're a client of mine and your site does fail, 
+                                    it's because I failed you first!
+
+                                    I'm also really into typography, so if there's a way for us to make your website beautiful without 
+                                    having to spend too much time or money on it, we'll find it!
+                                </p>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="column large-6 tab-full">
+                                        <h4>More About Me.</h4>
+                                        <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
+                                            <a itemprop='url' href=https://www.fiverr.com/oladapomiracle rel="nofollow" target="_blank" style='display: inline-block;'>
+                                               <div class='fiverr-seller-content' id='fiverr-seller-widget-content-58a25552-24eb-43cb-b3d6-9fdd0c8d2d38' itemprop='contentURL' style='display: none;'></div>
+                                               <div id='fiverr-widget-seller-data' style='display: none;'>
+                                                   <div itemprop='name' >oladapomiracle</div>
+                                                   <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
+                                                   <div itemprop='jobtitle'>Seller</div>
+                                                   <div itemprop='description'>My name is Miracle, a Python developer, I've been working with Python since I was in college, and I've seen it evolve from its humble beginnings to one of the most versatile languages in existence today. My specialty is web development and Natural Language Processing (such as bot creation and deployment). I have worked on many different projects with clients in the technology industry, including NLP, e-commerce, and social media management. I am proficient in both front-end and back-end languages but based on backend mostly, and I have experience with both static and dynamic websites. I am abl</div>
+                                               </div>
+                                           </a>
+                                       </div>
+                                       
+                                       <p>
+                                            I have always loved learning new things, whether it's taking a class or reading a book. My passion for studying computers led me to pursue a degree in this field.
+
+                                            My experience in college has been amazing overall, but there were definitely some hard times as well. 
+                                            The biggest challenge I faced was getting through the tough classes that required me to work harder than 
+                                            ever before and study more than ever before as well. However, this was also one of the most rewarding 
+                                            experiences I've had so far because I am now confident that I can handle anything life throws at me! 
+                                            Few of my web and software development projects are available on my <a href="https://www.github.com/martins0023">github</a> page.
+                                        </p>
+                                        <script id='fiverr-seller-widget-script-58a25552-24eb-43cb-b3d6-9fdd0c8d2d38' src='https://widgets.fiverr.com/api/v1/seller/oladapomiracle?widget_id=58a25552-24eb-43cb-b3d6-9fdd0c8d2d38' data-config='{"category_name":"Digital Marketing"}' async='true' defer='true'></script>
+                                    </div>
+                                    <div class="column large-6 tab-full">
+                                        <h4>Order on fiverr</h4>
+                                        <p>
+                                        Check out my Gig(s) on fiverr and place an order, I offer and put up few gigs out on fiverr<br>
+                                        I highly recommend {% for info in infos %}<a href="{{ info.whatsapp_link }}">chatting with me</a> {% endfor %} personally, if you're placing an order out of my fiverr Gig(s).
+                                        Probably you need more features or need to ask me some questions.
+                                        </p>
+                                        <a href="https://www.fiverr.com/oladapomiracle?public_mode=true" class="btn btn--stroke h-full-width">Order on fiverr</a>
+                                    </div>
+                                    
+                                    <div class="column large-6 tab-full">
+                                        <h4>I'm on Upwork</h4>
+                                        <p>
+                                        If you work with upwork regularly or you just prefer getting along with {% for info in infos %}<a href="{{ info.upwork_link }}">upwork</a>{% endfor %}<br>
+                                        You can as well just hire me on there 
+                                        {% for info in infos %}
+                                        <a href="{{ info.upwork_link }}"></a> if checking out my profile on upwork is all what you
+                                        {% endfor %}
+                                        want to do, you're free to go ahead. Most clients prefer just working or hiring people off upwork, this's for you if that's what your're up to. 
+                                        </p>
+                                        {% for info in infos %}
+                                        <a href="{{ info.upwork_link }}" class="btn btn--stroke h-full-width">Check me out on upwork</a>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="column large-6 tab-full">
+                                        <h4>Check out my blog</h4>
+                                        <p>
+                                        Check out my latest blog updates <br>
+                                         <a href="{% url 'blog' %}">here</a> 
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div> <!-- end 01. tab about -->
+
+                    <!-- 02. tab services -->
+                    <div id="tab-services" class='tab-content__item'>
+
+                        <div class="row tab-content__item-header">
+                            <div class="column">
+                                <h1>Few of the services I offer.</h1>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="column">
+                                <p class="lead">
+                                    I provide quality services and products to help your business succeed. My core focus is delivering the 
+                                    products that you need, as well as providing digital services to better optimize your bottom line.
+                                    I offer a wide range of services that meets your business, product or service needs.<br>
+                                    <br>
+                                    <i>"As a service, Swirloma helps companies demonstrate their value to their customers and differentiate their product offering. Our services are designed 
+                                    specifically to meet your business needs, whether you are a start-up or an established enterprise.</i>"
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row services-list block-large-1-2 block-medium-1-2 block-tab-full">
+                            
+                            {% for home in homes %}
+                            <div class="column services-list__item">
+                                <div class="services-list__item-content">
+                                    <h4 class="item-title">{{ home.service_title }}</h4>
+                                    <p>
+                                        {{ home.service_content }}
+                                    </p>
+                                    <a href="https://wa.me/message/JCNPYQRTRLOQG1" ><button type="button" class="btn--stroke btn--small ">
+                                        Contact me now
+                                        </button></a>
+                                    <!--<div>
+                                        <video class="miracle-vid" src="{{ home.service_files.url }}" alt="">
+                                    </div>-->
+                                </div>
+                            </div>
+                            {% endfor %}
+                
+                            <!--<div class="column services-list__item">
+                                <div class="services-list__item-content">
+                                    <h4 class="item-title">Illustration</h4>
+                                    <p>
+                                    Do you need content illustrations to attract your customers, I'll help you create astonishing and eye catching content illustration ads
+                                    for your customers. Get your customers attention with these illustrations at an affordable and reasonable pricing.
+                                    Terms and Conditions applies.
+                                    </p>
+                                </div>
+                            </div>
+                
+                            <div class="column services-list__item">
+                                <div class="services-list__item-content">
+                                    <h4 class="item-title">Web Management and Hosting</h4>
+                                    <p>
+                                    Do you need to host your fully desgned and developed personal website, I'll help you host your website at an affordable and reasonable pricing
+                                    so is your web management, if you have an already developed up and running website  and you need someone to take care, or manage the activities 
+                                    going on your website for you. I will help you get that done. Terms and conditions applies.
+                                    </p>
+                                </div>
+                            </div>
+                
+                            <div class="column services-list__item">
+                                <div class="services-list__item-content">
+                                    <h4 class="item-title">Bot Creation</h4>
+                                    <p>
+                                    Are you worried about how you can attend to your customers while you're away, that's what a bot can do for you, take your business to the next level by taking 
+                                    a step forward in creating a bot that can talk to your customers on your behalf while you're away, this can increase your reputation and business growth with your 
+                                    competitors. Your bot can be deployed on your website such as webhook, Telegram, WhatsApp, Facebook messenger, slack. Terms and conditions applies.
+                                    </p>
+                                </div>
+                            </div>
+                
+                            <div class="column services-list__item">
+                                <div class="services-list__item-content">
+                                    <h4 class="item-title">UI/UX Design</h4>
+                                    <p>
+                                    Sit ut cum molestiae. Dolore ducimus qui quasi. Fugiat consequatur sit vel illum vel et 
+                                    a delectus. Vel sequi vitae voluptatem perspiciatis eligendi. Voluptatibus optio natus 
+                                    asperiores est commodi amet quia architecto. Dolores necessitatibus et.
+                                    </p>
+                                </div>
+                            </div>
+                
+                            <div class="column services-list__item">
+                                <div class="services-list__item-content">
+                                    <h4 class="item-title">Mobile app development from your website</h4>
+                                    <p>
+                                    Do you have a website already, and you're looking forward in promoting your business or service?
+                                    I will help you convert your website to a mobile app both on Android and IOS to suit your customer's need.
+                                    Terms and Conditions applies.
+                                    </p>
+                                </div>
+                            </div>-->
+                
+                        </div> <!-- end services-list -->
+                        
+                    </div> <!-- end 02. tab services -->
+
+                    <!-- 03. tab project -->
+                    <div id="tab-project" class="tab-content__item">
+
+                        <div class="row tab-content__item-header">
+                            <div class="column">
+                                <h1>Check out my latest cool projects.</h1>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="column">
+                                <p class="lead">
+                                    Probably you need some clarfications about the services that's being listed, or you need to get in touch with me 
+                                    as soon as possible, you can reach out to me on my social media platforms by sending a direct message,
+                                    calling or texting any of the available numbers below is welcomed as well.
+                                </p>
+
+                                {% for project in projects %}
+                                <article class="media content-section">
+                                    <!--<img class="rounded-circle article-img" src="{{ blog.blog_image.url }}" alt="">-->
+                                      <div class="media-body">
+                                      <div class="article-metadata">
+                                          <small class="text-muted">{{ project.project_title }}</small> by <a class="mr-2" href="">swirloma</a>
+                                      </div>
+                                      <h2 class="lead">{{ project.project_title }}</h2>
+                                      <div class="single-post">
+                                        <img class="" src="{{ project.project_media.url }}" alt="{{ project.project_title }}">
+                                      </div>
+                                      <p class="article-content">{{ project.project_content }}  </p>
+                                      <small class="article">file is available to view <a href="{{ project.project_file.url }}">here</a></small>
+                                      </div>
+                                  </article>
+                                  {% endfor %}
+
+                                <div class="row">
+                                    <div class="column large-six tab-full">
+                                        <h4>Where to Find Me</h4>
+                
+                                        <p>
+                                            1600 Soka Road<br>
+                                            Ire-Akari Estate, OY<br>
+                                            200109 NG
+                                        </p>
+                
+                                    </div>
+                
+                                    <div class="column large-six tab-full">
+                                        <h4>Follow Me</h4>
+                
+                                        <ul class="link-list">
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.facebook_link }}"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.twitter_link }}"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.instagram_link }}"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.whatsapp_link }}"><i class="fab fa-whatsapp" aria-hidden="true"></i> Whatsapp</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.linkedin_link }}"><i class="fab fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+                                            {% endfor %}
+                                        </ul>
+                
+                                    </div>
+                                </div>
+
+                                <p class="tab-content__item-bottom">
+                                    {% for info in infos %}
+                                    <a href="mailto:{{ info.email_address }}" class="contact-email">{{ info.email_address }}</a>
+                                    {% endfor %}
+                                    <span class="contact-number">
+                                        {% for info in infos %} 
+                                        <a href="tel:{{ info.mobile_number }}">{{ info.mobile_number }}</a>
+                                        {% endfor %}
+                                        
+                                    </span>
+                                </p>
+
+
+
+                            </div>
+                        </div>
+                        
+                    </div> <!-- end 04. tab project -->
+
+                    <!-- 04. tab contact -->
+                    <div id="tab-contact" class="tab-content__item">
+
+                        <div class="row tab-content__item-header">
+                            <div class="column">
+                                <h1>Get In Touch With Me.</h1>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="column">
+                                <p class="lead">
+                                    Probably you need some clarfications about the services that's being listed, or you need to get in touch with me 
+                                    as soon as possible, you can reach out to me on my social media platforms by sending a direct message,
+                                    calling or texting any of the available numbers below is welcomed as well.
+                                </p>
+
+                                <script id='fiverr-seller-widget-script-58a25552-24eb-43cb-b3d6-9fdd0c8d2d38' src='https://widgets.fiverr.com/api/v1/seller/oladapomiracle?widget_id=58a25552-24eb-43cb-b3d6-9fdd0c8d2d38' data-config='{"category_name":"Digital Marketing"}' async='true' defer='true'></script>
+
+                                <div class="row">
+                                    <div class="column large-six tab-full">
+                                        <h4>Where to Find Me</h4>
+                
+                                        <p>
+                                            1600 Soka Road<br>
+                                            Ire-Akari Estate, OY<br>
+                                            200109 NG
+                                        </p>
+                
+                                    </div>
+                
+                                    <div class="column large-six tab-full">
+                                        <h4>Follow Me</h4>
+                
+                                        <ul class="link-list">
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.facebook_link }}"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.twitter_link }}"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.instagram_link }}"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.whatsapp_link }}"><i class="fab fa-whatsapp" aria-hidden="true"></i> Whatsapp</a></li>
+                                            {% endfor %}
+                                            {% for info in infos %}
+                                            <li><a href="{{ info.linkedin_link }}"><i class="fab fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+                                            {% endfor %}
+                                        </ul>
+                
+                                    </div>
+                                </div>
+
+                                <p class="tab-content__item-bottom">
+                                    {% for info in infos %}
+                                    <a href="mailto:{{ info.email_address }}" class="contact-email">{{ info.email_address }}</a>
+                                    {% endfor %}
+                                    <span class="contact-number">
+                                        {% for info in infos %} 
+                                        <a href="tel:{{ info.mobile_number }}">{{ info.mobile_number }}</a>
+                                        {% endfor %}
+                                        {% for info in infos %}
+                                        <a href="tel:{{ info.alternate_mobile_number }}">{{ info.alternate_mobile_number }}</a>
+                                        {% endfor %}
+                                    </span>
+                                </p>
+
+
+
+                            </div>
+                        </div>
+                        
+                    </div> <!-- end 04. tab contact -->
+
+                </div> <!-- end tab content -->
+
+                <footer>
+
+                    <div class="ss-copyright">
+                        <span>© Copyright swirloma <script>document.write(new Date().getFullYear());</script></span> 
+                        <span>Developed by <a href="">O.M.A</a></span>
+                    </div>
+
+                    <div class="ss-go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0l8 9h-6v15h-4v-15h-6z"></path></svg>
+                        </a>
+                    </div>
+                    
+                </footer>
+
+            </div> <!-- end column -->
+        </div> <!-- end row -->
+
+    </section> <!-- end s-info -->
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'home/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'home/js/plugins.js' %}"></script>
+    <script src="{% static 'home/js/main.js' %}"></script>
+
+</body>
